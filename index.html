@@ -1,410 +1,278 @@
+<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ALD1 翻譯網站</title>
     <link rel="icon" type="image/png" href="https://github.com/ald1a1mem.png">
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
             --bg-color: #f4f8fb;
             --card-bg: #ffffff;
             --text-color: #3b5973;
-            --light-blue: #e6f0f7;
+            --accent-color: #5698c3;
+            --border-color: #e2e8f0;
         }
 
         body {
             background-color: var(--bg-color);
-            font-family: 'Noto Sans TC', 'Fredoka', sans-serif;
+            font-family: 'Noto Sans TC', sans-serif;
             margin: 0;
             display: flex;
             flex-direction: column;
-            align-items: center;
+            min-height: 100vh;
         }
 
-        /* 網頁頂部標頭 */
-        .brand-header {
-            text-align: center;
-            padding: 30px 20px 15px 20px;
-        }
-        
-        .brand-title {
-            font-size: 2.6rem;
-            color: #638da3 !important;
-            margin: 0;
-            font-weight: 700;
-            letter-spacing: 3px;
-        }
-
-        /* 網頁頂部 Tab 切換鍵按鈕列 */
-        .tab-buttons {
+        /* 頂部橫幅 Banner 區塊 */
+        .banner {
+            width: 100%;
+            height: 280px;
+            background: linear-gradient(135deg, #cbd5e1, #94a3b8);
+            position: relative;
+            overflow: hidden;
             display: flex;
             justify-content: center;
-            gap: 10px;
-            background: #ffffff;
-            padding: 8px 15px;
-            border-radius: 50px;
-            box-shadow: 0 4px 15px rgba(86, 152, 195, 0.1);
-            margin-bottom: 30px;
-            max-width: 95%;
-            flex-wrap: wrap;
-            border: 2px solid var(--light-blue);
-        }
-
-        .tab-btn {
-            background: transparent;
-            border: none;
-            color: var(--text-color);
-            padding: 10px 20px;
-            font-size: 0.95rem;
-            font-weight: 700;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .tab-btn:hover {
-            background: var(--light-blue);
-            color: #03A9F4;
-        }
-
-        /* 各分頁按鈕啟動時的專屬色彩 */
-        .tab-buttons .tab-btn.active:nth-child(1) {
-            background-color: #e91e63 !important; /* 歌詞：浪漫粉紅 */
-            color: #ffffff !important;
-            box-shadow: 0 4px 0px #ad1457 !important;
-        }
-        .tab-buttons .tab-btn.active:nth-child(2) {
-            background-color: #ff9800 !important; /* 節目：活力橘色 */
-            color: #ffffff !important;
-            box-shadow: 0 4px 0px #e65100 !important;
-        }
-        .tab-buttons .tab-btn.active:nth-child(3) {
-            background-color: #9c27b0 !important; /* 直播：神祕紫羅蘭 */
-            color: #ffffff !important;
-            box-shadow: 0 4px 0px #6a1b9a !important;
-        }
-        .tab-buttons .tab-btn.active:nth-child(4) {
-            background-color: #00bcd4 !important; /* 媒體：清新青藍 */
-            color: #ffffff !important;
-            box-shadow: 0 4px 0px #00838f !important;
-        }
-
-        /* 內容容器 */
-        .container {
-            max-width: 800px;
-            width: 100%;
-            padding: 0 20px;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
             align-items: center;
         }
-
-        /* 預設隱藏所有分頁，只顯示 active 的那一頁 */
-        .tab-content {
-            display: none;
+        .banner img {
             width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
-        .tab-content.active {
+        /* 主體佈局：左側選單 + 右側內容網格 */
+        .main-layout {
+            display: flex;
+            max-width: 1200px;
+            width: 100%;
+            margin: 30px auto;
+            gap: 30px;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        /* 左側分類選單 */
+        .sidebar {
+            width: 180px;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .side-btn {
+            background: #ffffff;
+            border: 2px solid transparent;
+            color: var(--text-color);
+            padding: 12px 20px;
+            text-align: left;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+
+        .side-btn:hover, .side-btn.active {
+            background: #e6f0f7;
+            color: var(--accent-color);
+            border-color: #b9d2e3;
+        }
+
+        /* 右側內容區塊 */
+        .content-area {
+            flex-grow: 1;
+        }
+
+        .tab-pane {
+            display: none;
+        }
+
+        .tab-pane.active {
             display: block;
         }
 
-        /* 卡片設計 */
-        .card {
-            background: var(--card-bg);
-            border-width: 4px;
-            border-style: solid;
-            border-radius: 28px;
-            padding: 35px 25px;
-            box-shadow: 0 10px 0px rgba(86, 152, 195, 0.15);
-            position: relative;
-            margin-bottom: 35px;
-        }
-
-        .card::before {
-            content: '● ●';
-            position: absolute;
-            top: 12px;
-            left: 20px;
-            opacity: 0.4;
-            font-size: 0.8rem;
-            letter-spacing: 3px;
-        }
-
-        h2 {
-            font-size: 1.7rem;
-            margin-top: 0;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        /* 網格與清單排版 */
-        .translate-grid {
+        /* 影片卡片網格 */
+        .video-grid {
             display: grid;
-            grid-template-columns: 1fr;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
             gap: 20px;
         }
 
-        .translate-item {
-            background: #fafbfc;
-            border: 2px dashed #b9d2e3;
-            padding: 20px;
-            border-radius: 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        /* 單張影片卡片 */
+        .video-card {
+            background: var(--card-bg);
+            border-radius: 18px;
+            overflow: hidden;
+            border: 2px solid var(--border-color);
+            box-shadow: 0 4px 12px rgba(86, 152, 195, 0.08);
             text-decoration: none;
-            transition: all 0.2s ease;
-        }
-
-        .translate-item:hover {
-            transform: translateY(-2px);
-            background: #f0f6fb;
-        }
-
-        .item-info {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
             display: flex;
             flex-direction: column;
-            gap: 6px;
         }
 
-        .item-title {
+        .video-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(86, 152, 195, 0.15);
+        }
+
+        .thumbnail-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 比例 */
+            background: #000;
+        }
+
+        .thumbnail-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-details {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .video-title {
             font-weight: 700;
             color: var(--text-color);
-            font-size: 1.1rem;
+            font-size: 0.95rem;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
-        .item-desc {
-            font-size: 0.9rem;
+        .video-meta {
+            font-size: 0.8rem;
             color: #78909c;
+            line-height: 1.5;
         }
 
-        .item-action {
-            font-weight: bold;
-            padding: 8px 16px;
-            border-radius: 12px;
-            font-size: 0.9rem;
-        }
-
-        /* 頁尾樣式 */
         footer {
-            margin: 20px 0 30px 0;
-            font-size: 0.85rem;
-            color: #a0b9cc;
             text-align: center;
-            width: 100%;
-            letter-spacing: 1px;
+            padding: 20px;
+            color: #a0b9cc;
+            font-size: 0.85rem;
+            margin-top: auto;
+        }
+
+        /* RWD 手機響應式調整 */
+        @media (max-width: 768px) {
+            .main-layout {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                flex-direction: row;
+                overflow-x: auto;
+                padding-bottom: 5px;
+            }
+            .side-btn {
+                white-space: nowrap;
+                padding: 10px 15px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="brand-header">
-        <div class="brand-title">ALD1 翻譯網站</div>
+    <!-- 頂部 Banner -->
+    <div class="banner">
+        <!-- 這裡可以放你的 Banner 圖片 -->
+        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop" alt="Banner">
     </div>
 
-    <!-- 分頁按鈕列 -->
-    <div class="tab-buttons">
-        <button class="tab-btn active" onclick="showTab('tab-lyrics', this)">🎵 歌詞</button>
-        <button class="tab-btn" onclick="showTab('tab-shows', this)">📺 節目</button>
-        <button class="tab-btn" onclick="showTab('tab-lives', this)">🔴 直播</button>
-        <button class="tab-btn" onclick="showTab('tab-media', this)">📰 媒體</button>
-    </div>
+    <!-- 主要版型 -->
+    <div class="main-layout">
+        
+        <!-- 左側選單 -->
+        <div class="sidebar">
+            <button class="side-btn active" onclick="switchTab('lives', this)">🔴 直播</button>
+            <button class="side-btn" onclick="switchTab('shows', this)">📺 節目</button>
+            <button class="side-btn" onclick="switchTab('media', this)">📰 媒體</button>
+        </div>
 
-    <div class="container">
-
-<!-- ================= 分頁 1：繁中歌詞 ================= -->
-<div id="stage-content" class="tab-content">
-
-<style>
-    #stage-content {
-        padding: 20px 0; width: 100%; max-width: 710px; margin: 0 auto; box-sizing: border-box;
-    }
-    #stage-content .card {
-        background: #ffffff !important;
-        border: 3px solid #9FB5C3!important;
-        border-radius: 30px !important;
-        padding: 30px 25px !important;
-        margin-bottom: 30px !important;
-        box-shadow: 0 8px 24px rgba(196, 139, 89, 0.1) !important;
-        width: 100% !important; box-sizing: border-box !important; display: block !important;
-    }
-    /* 1. 標題、影片標題與影片日期全部改成焦糖暖棕 */
-    #stage-content h2,
-    #stage-content .video-title,
-    #stage-content .stage-title,
-    #stage-content .video-member,
-    #stage-content .video-date,
-    #stage-content .stage-date {
-        color: #9FB5C3 !important;
-    }
-    #stage-content h2 {
-        font-size: 24px !important; margin-top: 0 !important; margin-bottom: 20px !important; text-align: center !important; font-weight: bold !important;
-    }
-    /* 2. 徹底隱藏左上角長方體 */
-    #stage-content .card::before,
-    #stage-content .dot,
-    #stage-content .circle { 
-        display: none !important; 
-    }
-</style>
-
-<div class="card">
-    <h2>No School Tomorrow</h2>
-    <div class="video-grid" style="display: flex; overflow-x: auto; flex-wrap: nowrap; gap: 15px; padding-bottom: 15px;">
-        <a href="https://www.youtube.com/watch?v=cImgLX-9Co0" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
-            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
-                <img src="https://img.youtube.com/vi/cImgLX-9Co0/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+        <!-- 右側內容清單 -->
+        <div class="content-area">
+            
+            <!-- 直播分頁內容 -->
+            <div id="lives" class="tab-pane active">
+                <div class="video-grid">
+                    <!-- 影片卡片 1 -->
+                    <a href="https://www.youtube.com/watch?v=你的影片ID" target="_blank" class="video-card">
+                        <div class="thumbnail-container">
+                            <img src="https://img.youtube.com/vi/你的影片ID/mqdefault.jpg" alt="封面">
+                        </div>
+                        <div class="video-details">
+                            <div class="video-title">20260725 FLARE U IG直播</div>
+                            <div class="video-meta">
+                                翻譯：Lupus<br>
+                                字幕製作：西卡<br>
+                                校對：西卡
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <!-- 可以複製上面這段 <a class="video-card">...</a> 來新增更多卡片 -->
+                </div>
             </div>
-            <div class="video-info">
-                <div class="video-title" style="color: var(--text-color);">ALPHA DRIVE ONE - Good Life</div>
+
+            <!-- 節目分頁內容 -->
+            <div id="shows" class="tab-pane">
+                <div class="video-grid">
+                    <a href="https://www.youtube.com/watch?v=你的影片ID" target="_blank" class="video-card">
+                        <div class="thumbnail-container">
+                            <img src="https://img.youtube.com/vi/你的影片ID/mqdefault.jpg" alt="封面">
+                        </div>
+                        <div class="video-details">
+                            <div class="video-title">20260724 Another Class 節目</div>
+                            <div class="video-meta">
+                                翻譯：Lupus<br>
+                                字幕製作：西卡
+                            </div>
+                        </div>
+                    </a>
+                </div>
             </div>
-        </a>
 
+            <!-- 媒體分頁內容 -->
+            <div id="media" class="tab-pane">
+                <div class="video-grid">
+                    <!-- 媒體內容卡片 -->
+                </div>
+            </div>
+
+        </div>
     </div>
-</div>
-
-</div>
-
-        <!-- ================= 分頁 2：節目 ================= -->
-<div id="stage-content" class="tab-content">
-
-<style>
-    #stage-content {
-        padding: 20px 0; width: 100%; max-width: 710px; margin: 0 auto; box-sizing: border-box;
-    }
-    #stage-content .card {
-        background: #ffffff !important;
-        border: 3px solid #c48b59 !important;
-        border-radius: 30px !important;
-        padding: 30px 25px !important;
-        margin-bottom: 30px !important;
-        box-shadow: 0 8px 24px rgba(196, 139, 89, 0.1) !important;
-        width: 100% !important; box-sizing: border-box !important; display: block !important;
-    }
-    /* 1. 標題、影片標題與影片日期全部改成焦糖暖棕 */
-    #stage-content h2,
-    #stage-content .video-title,
-    #stage-content .stage-title,
-    #stage-content .video-member,
-    #stage-content .video-date,
-    #stage-content .stage-date {
-        color: #c48b59 !important;
-    }
-    #stage-content h2 {
-        font-size: 24px !important; margin-top: 0 !important; margin-bottom: 20px !important; text-align: center !important; font-weight: bold !important;
-    }
-    /* 2. 徹底隱藏左上角長方體 */
-    #stage-content .card::before,
-    #stage-content .dot,
-    #stage-content .circle { 
-        display: none !important; 
-    }
-</style>
-
-
-
-</div>
-
-        <!-- ================= 分頁 3：直播 ================= -->
-<div id="variety-content" class="tab-content" style="display: none;">
-    
-<style>
-    #variety-content {
-        padding: 20px 0; width: 100%; max-width: 710px; margin: 0 auto; box-sizing: border-box;
-    }
-    #variety-content .card {
-        background: #ffffff !important;
-        border: 3px solid #5b8c76 !important;
-        border-radius: 30px !important;
-        padding: 30px 25px !important;
-        margin-bottom: 30px !important;
-        box-shadow: 0 8px 24px rgba(91, 140, 118, 0.1) !important;
-        width: 100% !important; box-sizing: border-box !important; display: block !important;
-    }
-    /* 1. 標題、影片名、成員名、影片日期全部變成迷霧森林深綠 */
-    #variety-content h2,
-    #variety-content .video-title,
-    #variety-content .video-member,
-    #variety-content .video-date,
-    #variety-content .variety-date {
-        color: #5b8c76 !important;
-    }
-    #variety-content h2 {
-        font-size: 24px !important; margin-top: 0 !important; margin-bottom: 20px !important; text-align: center !important; font-weight: bold !important;
-    }
-    /* 2. 徹底隱藏左上角長方體 */
-    #variety-content .card::before,
-    #variety-content .dot,
-    #variety-content .circle { 
-        display: none !important; 
-    }
-</style>
-
-
-
-</div>
-
-        <!-- ================= 分頁 4：媒體 ================= -->
-<div id="yt-content" class="tab-content" style="display: none;">
-
-<style>
-    #yt-content {
-        padding: 20px 0; width: 100%; max-width: 710px; margin: 0 auto; box-sizing: border-box;
-    }
-    #yt-content .card {
-        background: #ffffff !important;
-        border: 3px solid #b87070 !important; /* 換成乾燥玫瑰粉框 */
-        border-radius: 30px !important;
-        padding: 30px 25px !important;
-        margin-bottom: 30px !important;
-        box-shadow: 0 8px 24px rgba(184, 112, 112, 0.1) !important;
-        width: 100% !important; box-sizing: border-box !important; display: block !important;
-    }
-    /* 1. 標題、影片名與影片日期全部變成乾燥玫瑰深粉 */
-    #yt-content h2,
-    #yt-content .video-title,
-    #yt-content .video-date,
-    #yt-content .yt-date {
-        color: #b87070 !important;
-    }
-    #yt-content h2 {
-        font-size: 24px !important; margin-top: 0 !important; margin-bottom: 20px !important; text-align: center !important; font-weight: bold !important;
-    }
-    /* 2. 徹底隱藏左上角長方體 */
-    #yt-content .card::before,
-    #yt-content .dot,
-    #yt-content .circle { 
-        display: none !important; 
-    }
-</style>
-
-
-
-    </div>
-</div>
-
-</div>
 
     <footer>
         &copy; ald1.a1mem
     </footer>
 
-    <!-- 分頁切換 JavaScript 程式碼 -->
+    <!-- 切換分頁的 JavaScript -->
     <script>
-        function showTab(tabId, btnElement) {
-            // 隱藏所有分頁內容
-            const contents = document.querySelectorAll('.tab-content');
-            contents.forEach(content => content.classList.remove('active'));
+        function switchTab(tabId, btnElement) {
+            // 隱藏所有右側內容
+            const panes = document.querySelectorAll('.tab-pane');
+            panes.forEach(pane => pane.classList.remove('active'));
 
-            // 移除所有按鈕的 active 狀態
-            const buttons = document.querySelectorAll('.tab-btn');
+            // 移除所有左側按鈕的 active 樣式
+            const buttons = document.querySelectorAll('.side-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
 
-            // 顯示點擊的分頁並啟動按鈕狀態
+            // 顯示點擊的對應分頁與按鈕樣式
             document.getElementById(tabId).classList.add('active');
             btnElement.classList.add('active');
         }
