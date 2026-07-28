@@ -1,0 +1,309 @@
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALD1 翻譯網站</title>
+    <link rel="icon" type="image/png" href="https://github.com/ald1a1mem.png">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #f4f8fb;
+            --card-bg: #ffffff;
+            --text-color: #3b5973;
+            --light-blue: #e6f0f7;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            font-family: 'Noto Sans TC', 'Fredoka', sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* 網頁頂部標頭 */
+        .brand-header {
+            text-align: center;
+            padding: 30px 20px 15px 20px;
+        }
+        
+        .brand-title {
+            font-size: 2.6rem;
+            color: #638da3 !important;
+            margin: 0;
+            font-weight: 700;
+            letter-spacing: 3px;
+        }
+
+        /* 網頁頂部 Tab 切換鍵按鈕列 */
+        .tab-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            background: #ffffff;
+            padding: 8px 15px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(86, 152, 195, 0.1);
+            margin-bottom: 30px;
+            max-width: 95%;
+            flex-wrap: wrap;
+            border: 2px solid var(--light-blue);
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-color);
+            padding: 10px 20px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn:hover {
+            background: var(--light-blue);
+            color: #03A9F4;
+        }
+
+        /* 各分頁按鈕啟動時的專屬色彩 */
+        .tab-buttons .tab-btn.active:nth-child(1) {
+            background-color: #e91e63 !important; /* 歌詞：浪漫粉紅 */
+            color: #ffffff !important;
+            box-shadow: 0 4px 0px #ad1457 !important;
+        }
+        .tab-buttons .tab-btn.active:nth-child(2) {
+            background-color: #ff9800 !important; /* 節目：活力橘色 */
+            color: #ffffff !important;
+            box-shadow: 0 4px 0px #e65100 !important;
+        }
+        .tab-buttons .tab-btn.active:nth-child(3) {
+            background-color: #9c27b0 !important; /* 直播：神祕紫羅蘭 */
+            color: #ffffff !important;
+            box-shadow: 0 4px 0px #6a1b9a !important;
+        }
+        .tab-buttons .tab-btn.active:nth-child(4) {
+            background-color: #00bcd4 !important; /* 媒體：清新青藍 */
+            color: #ffffff !important;
+            box-shadow: 0 4px 0px #00838f !important;
+        }
+
+        /* 內容容器 */
+        .container {
+            max-width: 800px;
+            width: 100%;
+            padding: 0 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* 預設隱藏所有分頁，只顯示 active 的那一頁 */
+        .tab-content {
+            display: none;
+            width: 100%;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* 卡片設計 */
+        .card {
+            background: var(--card-bg);
+            border-width: 4px;
+            border-style: solid;
+            border-radius: 28px;
+            padding: 35px 25px;
+            box-shadow: 0 10px 0px rgba(86, 152, 195, 0.15);
+            position: relative;
+            margin-bottom: 35px;
+        }
+
+        .card::before {
+            content: '● ●';
+            position: absolute;
+            top: 12px;
+            left: 20px;
+            opacity: 0.4;
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+        }
+
+        h2 {
+            font-size: 1.7rem;
+            margin-top: 0;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* 網格與清單排版 */
+        .translate-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .translate-item {
+            background: #fafbfc;
+            border: 2px dashed #b9d2e3;
+            padding: 20px;
+            border-radius: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .translate-item:hover {
+            transform: translateY(-2px);
+            background: #f0f6fb;
+        }
+
+        .item-info {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .item-title {
+            font-weight: 700;
+            color: var(--text-color);
+            font-size: 1.1rem;
+        }
+
+        .item-desc {
+            font-size: 0.9rem;
+            color: #78909c;
+        }
+
+        .item-action {
+            font-weight: bold;
+            padding: 8px 16px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+        }
+
+        /* 頁尾樣式 */
+        footer {
+            margin: 20px 0 30px 0;
+            font-size: 0.85rem;
+            color: #a0b9cc;
+            text-align: center;
+            width: 100%;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="brand-header">
+        <div class="brand-title">ALD1 翻譯網站</div>
+    </div>
+
+    <!-- 四個新分類的分頁按鈕列 -->
+    <div class="tab-buttons">
+        <button class="tab-btn active" onclick="showTab('tab-lyrics', this)">🎵 歌詞</button>
+        <button class="tab-btn" onclick="showTab('tab-shows', this)">📺 節目</button>
+        <button class="tab-btn" onclick="showTab('tab-lives', this)">🟠直播</button>
+        <button class="tab-btn" onclick="showTab('tab-media', this)">📰 媒體</button>
+    </div>
+
+    <div class="container">
+
+        <!-- ================= 分頁 1：歌詞 ================= -->
+        <div id="tab-lyrics" class="tab-content active">
+            <div class="card" style="border-color: #e91e63; color: #e91e63;">
+                <h2 style="color: #e91e63;">繁中歌詞</h2>
+                <div class="translate-grid">
+
+                    <a href="請填入連結" target="_blank" class="translate-item" style="border-color: #f8bbd0;">
+                        <div class="item-info">
+                            <span class="item-title">ALD1 - 曲名範例 (Title Track)</span>
+                            <span class="item-desc">類型：主打曲歌詞中字 | 發布日期：2026</span>
+                        </div>
+                        <div class="item-action" style="color: #e91e63; background: #fce4ec;">查看歌詞</div>
+                    </a>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ================= 分頁 2：節目 ================= -->
+        <div id="tab-shows" class="tab-content">
+            <div class="card" style="border-color: #ff9800; color: #ff9800;">
+                <h2 style="color: #ff9800;">綜藝與節目翻譯</h2>
+                <div class="translate-grid">
+                    <a href="請填入連結" target="_blank" class="translate-item" style="border-color: #ffe0b2;">
+                        <div class="item-info">
+                            <span class="item-title">【中字】ALD1 團綜精華 EP.01</span>
+                            <span class="item-desc">類型：綜藝節目 | 發布日期：2026</span>
+                        </div>
+                        <div class="item-action" style="color: #ff9800; background: #fff3e0;">觀看節目</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= 分頁 3：直播 ================= -->
+        <div id="tab-lives" class="tab-content">
+            <div class="card" style="border-color: #9c27b0; color: #9c27b0;">
+                <h2 style="color: #9c27b0;">直播中字與精華</h2>
+                <div class="translate-grid">
+                    <a href="請填入連結" target="_blank" class="translate-item" style="border-color: #e1bee7;">
+                        <div class="item-info">
+                            <span class="item-title">【中字】ALD1 出道紀念慶祝直播精華</span>
+                            <span class="item-desc">類型：直播中字 | 發布日期：2026</span>
+                        </div>
+                        <div class="item-action" style="color: #9c27b0; background: #f3e5f5;">觀看直播</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= 分頁 4：媒體 ================= -->
+        <div id="tab-media" class="tab-content">
+            <div class="card" style="border-color: #00bcd4; color: #00bcd4;">
+                <h2 style="color: #00bcd4;">媒體報導與雜誌專訪</h2>
+                <div class="translate-grid">
+                    <a href="請填入連結" target="_blank" class="translate-item" style="border-color: #b2ebf2;">
+                        <div class="item-info">
+                            <span class="item-title">【中字】Madame FIGARO Hong Kong 專訪中字</span>
+                            <span class="item-desc">類型：雜誌媒體訪談 | 發布日期：2026</span>
+                        </div>
+                        <div class="item-action" style="color: #00bcd4; background: #e0f7fa;">閱讀報導</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        &copy; 2026 ALD1 Translation Team. All Rights Reserved.
+    </footer>
+
+    <!-- 分頁切換 JavaScript 程式碼 -->
+    <script>
+        function showTab(tabId, btnElement) {
+            // 隱藏所有分頁內容
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+
+            // 移除所有按鈕的 active 狀態
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // 顯示點擊的分頁並啟動按鈕狀態
+            document.getElementById(tabId).classList.add('active');
+            btnElement.classList.add('active');
+        }
+    </script>
+</body>
+</html>
