@@ -216,10 +216,41 @@
 
     <div class="container">
 
-        <!-- ================= 分頁 1：歌詞（改為歌詞影片呈現） ================= -->
-        <div id="tab-lyrics" class="tab-content active">
-            <div class="card" style="border-color: #e91e63; color: #e91e63;">
-                <h2 style="color: #e91e63;">繁中歌詞</h2>
+<!-- ================= 分頁 1：繁中歌詞 ================= -->
+<div id="stage-content" class="tab-content">
+
+<style>
+    #stage-content {
+        padding: 20px 0; width: 100%; max-width: 710px; margin: 0 auto; box-sizing: border-box;
+    }
+    #stage-content .card {
+        background: #ffffff !important;
+        border: 3px solid #9FB5C3!important;
+        border-radius: 30px !important;
+        padding: 30px 25px !important;
+        margin-bottom: 30px !important;
+        box-shadow: 0 8px 24px rgba(196, 139, 89, 0.1) !important;
+        width: 100% !important; box-sizing: border-box !important; display: block !important;
+    }
+    /* 1. 標題、影片標題與影片日期全部改成焦糖暖棕 */
+    #stage-content h2,
+    #stage-content .video-title,
+    #stage-content .stage-title,
+    #stage-content .video-member,
+    #stage-content .video-date,
+    #stage-content .stage-date {
+        color: #9FB5C3 !important;
+    }
+    #stage-content h2 {
+        font-size: 24px !important; margin-top: 0 !important; margin-bottom: 20px !important; text-align: center !important; font-weight: bold !important;
+    }
+    /* 2. 徹底隱藏左上角長方體 */
+    #stage-content .card::before,
+    #stage-content .dot,
+    #stage-content .circle { 
+        display: none !important; 
+    }
+</style>
 
 <div class="card">
     <h2>No School Tomorrow</h2>
@@ -239,27 +270,117 @@
 </div>
 
         <!-- ================= 分頁 2：節目 ================= -->
-        <div id="tab-shows" class="tab-content">
-            <div class="card" style="border-color: #ff9800; color: #ff9800;">
-                <h2 style="color: #ff9800;">節目</h2>
+<div id="stage-content" class="tab-content">
+
+<style>
+    #stage-content {
+        padding: 20px 0; width: 100%; max-width: 710px; margin: 0 auto; box-sizing: border-box;
+    }
+    #stage-content .card {
+        background: #ffffff !important;
+        border: 3px solid #c48b59 !important;
+        border-radius: 30px !important;
+        padding: 30px 25px !important;
+        margin-bottom: 30px !important;
+        box-shadow: 0 8px 24px rgba(196, 139, 89, 0.1) !important;
+        width: 100% !important; box-sizing: border-box !important; display: block !important;
+    }
+    /* 1. 標題、影片標題與影片日期全部改成焦糖暖棕 */
+    #stage-content h2,
+    #stage-content .video-title,
+    #stage-content .stage-title,
+    #stage-content .video-member,
+    #stage-content .video-date,
+    #stage-content .stage-date {
+        color: #c48b59 !important;
+    }
+    #stage-content h2 {
+        font-size: 24px !important; margin-top: 0 !important; margin-bottom: 20px !important; text-align: center !important; font-weight: bold !important;
+    }
+    /* 2. 徹底隱藏左上角長方體 */
+    #stage-content .card::before,
+    #stage-content .dot,
+    #stage-content .circle { 
+        display: none !important; 
+    }
+</style>
 
 
 
 </div>
 
         <!-- ================= 分頁 3：直播 ================= -->
-        <div id="tab-lives" class="tab-content">
-            <div class="card" style="border-color: #9c27b0; color: #9c27b0;">
-                <h2 style="color: #9c27b0;">直播</h2>
+<div id="variety-content" class="tab-content" style="display: none;">
+    
+<style>
+    #variety-content {
+        padding: 20px 0; width: 100%; max-width: 710px; margin: 0 auto; box-sizing: border-box;
+    }
+    #variety-content .card {
+        background: #ffffff !important;
+        border: 3px solid #5b8c76 !important;
+        border-radius: 30px !important;
+        padding: 30px 25px !important;
+        margin-bottom: 30px !important;
+        box-shadow: 0 8px 24px rgba(91, 140, 118, 0.1) !important;
+        width: 100% !important; box-sizing: border-box !important; display: block !important;
+    }
+    /* 1. 標題、影片名、成員名、影片日期全部變成迷霧森林深綠 */
+    #variety-content h2,
+    #variety-content .video-title,
+    #variety-content .video-member,
+    #variety-content .video-date,
+    #variety-content .variety-date {
+        color: #5b8c76 !important;
+    }
+    #variety-content h2 {
+        font-size: 24px !important; margin-top: 0 !important; margin-bottom: 20px !important; text-align: center !important; font-weight: bold !important;
+    }
+    /* 2. 徹底隱藏左上角長方體 */
+    #variety-content .card::before,
+    #variety-content .dot,
+    #variety-content .circle { 
+        display: none !important; 
+    }
+</style>
 
 
 
 </div>
 
         <!-- ================= 分頁 4：媒體 ================= -->
-        <div id="tab-media" class="tab-content">
-            <div class="card" style="border-color: #00bcd4; color: #00bcd4;">
-                <h2 style="color: #00bcd4;">媒體採訪</h2>
+<div id="yt-content" class="tab-content" style="display: none;">
+
+<style>
+    #yt-content {
+        padding: 20px 0; width: 100%; max-width: 710px; margin: 0 auto; box-sizing: border-box;
+    }
+    #yt-content .card {
+        background: #ffffff !important;
+        border: 3px solid #b87070 !important; /* 換成乾燥玫瑰粉框 */
+        border-radius: 30px !important;
+        padding: 30px 25px !important;
+        margin-bottom: 30px !important;
+        box-shadow: 0 8px 24px rgba(184, 112, 112, 0.1) !important;
+        width: 100% !important; box-sizing: border-box !important; display: block !important;
+    }
+    /* 1. 標題、影片名與影片日期全部變成乾燥玫瑰深粉 */
+    #yt-content h2,
+    #yt-content .video-title,
+    #yt-content .video-date,
+    #yt-content .yt-date {
+        color: #b87070 !important;
+    }
+    #yt-content h2 {
+        font-size: 24px !important; margin-top: 0 !important; margin-bottom: 20px !important; text-align: center !important; font-weight: bold !important;
+    }
+    /* 2. 徹底隱藏左上角長方體 */
+    #yt-content .card::before,
+    #yt-content .dot,
+    #yt-content .circle { 
+        display: none !important; 
+    }
+</style>
 
 
 
