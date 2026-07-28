@@ -71,19 +71,19 @@
 
         /* 各分頁按鈕啟動時的專屬色彩 */
         .tab-buttons .tab-btn.active:nth-child(1) {
-            background-color: #e91e63 !important;
+            background-color: #9FB5C3 !important;
             color: #ffffff !important;
             box-shadow: 0 4px 0px #ad1457 !important;
         }
         .tab-buttons .tab-btn.active:nth-child(2) {
-            background-color: #ff9800 !important;
+            background-color: #c48b59 !important;
             color: #ffffff !important;
             box-shadow: 0 4px 0px #e65100 !important;
         }
         .tab-buttons .tab-btn.active:nth-child(3) {
-            background-color: #9c27b0 !important;
+            background-color: #5b8c76 !important;
             color: #ffffff !important;
-            box-shadow: 0 4px 0px #6a1b9a !important;
+            box-shadow: 0 4px 0px #b87070 !important;
         }
         .tab-buttons .tab-btn.active:nth-child(4) {
             background-color: #00bcd4 !important;
@@ -231,79 +231,103 @@
     <div class="container">
 
         <!-- ================= 分頁 1：歌詞 ================= -->
-        <div id="tab-lyrics" class="tab-content active">
+<div id="tab-lyrics" class="tab-content active">
             <style>
                 #tab-lyrics .card { border-color: #9FB5C3 !important; }
                 #tab-lyrics h2, #tab-lyrics .custom-title, #tab-lyrics .custom-members, #tab-lyrics .custom-date { color: #9FB5C3 !important; }
                 #tab-lyrics .custom-card { border-color: #9FB5C3 !important; }
                 #tab-lyrics .card::before { display: none !important; }
             </style>
+            <style>
+                .tab-buttons .tab-btn.active:nth-child(1) {
+                    background-color: #9FB5C3 !important;
+                    color: #ffffff !important;
+                    box-shadow: 0 4px 0px #7a94a2 !important;
+                }
+            </style>
 
 <div class="card">
     <h2>No School Tomorrow</h2>
-    <div class="video-grid" style="display: flex; overflow-x: auto; flex-wrap: nowrap; gap: 15px; padding-bottom: 15px;">
-        <a href="https://www.youtube.com/watch?v=cImgLX-9Co0" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
-            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
-                <img src="https://img.youtube.com/vi/cImgLX-9Co0/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+    <div class="custom-grid">
+        <a href="https://www.youtube.com/watch?v=cImgLX-9Co0" class="custom-card" target="_blank">
+            <div class="custom-img-container">
+                <img src="https://img.youtube.com/vi/cImgLX-9Co0/mqdefault.jpg" alt="縮圖">
             </div>
-            <div class="video-info">
-                <div class="video-title" style="color: var(--text-color);">ALPHA DRIVE ONE - Good Life</div>
-                <div class="video-member" style="font-size: 12px; margin-bottom: 4px; font-weight: 500; display: block;">
+            <div class="custom-info">
+                <div class="custom-title">ALPHA DRIVE ONE - Good Life</div>
+            </div>
         </a>
-
     </div>
 </div>
 
         </div>
 
         <!-- ================= 分頁 2：節目 ================= -->
-        <div id="tab-shows" class="tab-content">
+<div id="tab-shows" class="tab-content">
             <style>
-                #tab-shows .card { border-color: #c48b59 !important; }
-                #tab-shows h2, #tab-shows .custom-title, #tab-shows .custom-members, #tab-shows .custom-date { color: #c48b59 !important; }
-                #tab-shows .custom-card { border-color: #c48b59 !important; }
+                #tab-shows .card { border-color: #A39797 !important; }
+                #tab-shows h2, #tab-shows .custom-title, #tab-shows .custom-members, #tab-shows .custom-date { color: #A39797 !important; }
+                #tab-shows .custom-card { border-color: #A39797 !important; }
                 #tab-shows .card::before { display: none !important; }
+            </style>
+            <style>
+                .tab-buttons .tab-btn.active:nth-child(2) {
+                    background-color: #A39797 !important;
+                    color: #ffffff !important;
+                    box-shadow: 0 4px 0px #827575 !important;
+                }
             </style>
 
 <div class="card">
     <h2>SBS</h2>
-    <div class="video-grid" style="display: flex; overflow-x: auto; flex-wrap: nowrap; gap: 15px; padding-bottom: 15px;">
-
-<a href="https://ald1a1mem.github.io/260726-MC/" class="video-card" target="_blank">
-    <div class="video-thumb">
-        <img src="https://img.youtube.com/vi/GHwLU2pNKPo/mqdefault.jpg" alt="縮圖">
-    </div>
-    <div class="video-info">
-        <div class="video-title">260726 SBS 人氣歌謠 彝晛 & 俊抒 & 相沅 MC cut 合集</div>
-    </div>
-</a>
-
+    <div class="custom-grid">
+        <a href="https://ald1a1mem.github.io/260726-MC/" class="custom-card" target="_blank">
+            <div class="custom-img-container">
+                <img src="https://img.youtube.com/vi/GHwLU2pNKPo/mqdefault.jpg" alt="縮圖">
+            </div>
+            <div class="custom-info">
+                <div class="custom-title">260726 SBS 人氣歌謠 彝晛 & 俊抒 & 相沅 MC cut 合集</div>
+            </div>
+        </a>
     </div>
 </div>
 
         </div>
 
         <!-- ================= 分頁 3：直播 ================= -->
-        <div id="tab-lives" class="tab-content">
+<div id="tab-lives" class="tab-content">
             <style>
-                #tab-lives .card { border-color: #5b8c76 !important; }
-                #tab-lives h2, #tab-lives .custom-title, #tab-lives .custom-members, #tab-lives .custom-date { color: #5b8c76 !important; }
-                #tab-lives .custom-card { border-color: #5b8c76 !important; }
+                #tab-lives .card { border-color: #CBA29E !important; }
+                #tab-lives h2, #tab-lives .custom-title, #tab-lives .custom-members, #tab-lives .custom-date { color: #CBA29E !important; }
+                #tab-lives .custom-card { border-color: #CBA29E !important; }
                 #tab-lives .card::before { display: none !important; }
+            </style>
+            <style>
+                .tab-buttons .tab-btn.active:nth-child(3) {
+                    background-color: #CBA29E !important;
+                    color: #ffffff !important;
+                    box-shadow: 0 4px 0px #a9807c !important;
+                }
             </style>
 
 
         </div>
 
         <!-- ================= 分頁 4：媒體 ================= -->
-        <div id="tab-media" class="tab-content">
+<div id="tab-media" class="tab-content">
             <style>
-                #tab-media .card { border-color: #b87070 !important; }
-                #tab-media h2, #tab-media .custom-title, #tab-media .custom-members, #tab-media .custom-date { color: #b87070 !important; }
-                #tab-media .custom-card { border-color: #b87070 !important; }
+                #tab-media .card { border-color: #C3B3CF !important; }
+                #tab-media h2, #tab-media .custom-title, #tab-media .custom-members, #tab-media .custom-date { color: #C3B3CF !important; }
+                #tab-media .custom-card { border-color: #C3B3CF !important; }
                 #tab-media .card::before { display: none !important; }
             </style>
-
+            <style>
+                .tab-buttons .tab-btn.active:nth-child(4) {
+                    background-color: #C3B3CF !important;
+                    color: #ffffff !important;
+                    box-shadow: 0 4px 0px #9f8fae !important;
+                }
+            </style>
 
         </div>
 
