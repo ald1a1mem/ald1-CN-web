@@ -1,133 +1,178 @@
-<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ALD1 翻譯網站</title>
     <link rel="icon" type="image/png" href="https://github.com/ald1a1mem.png">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
             --bg-color: #f4f8fb;
             --card-bg: #ffffff;
             --text-color: #3b5973;
-            --accent-color: #5698c3;
-            --border-color: #e2e8f0;
+            --light-blue: #e6f0f7;
         }
 
         body {
             background-color: var(--bg-color);
-            font-family: 'Noto Sans TC', sans-serif;
+            font-family: 'Noto Sans TC', 'Fredoka', sans-serif;
             margin: 0;
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
-        }
-
-        /* 頂部橫幅 Banner 區塊 */
-        .banner {
-            width: 100%;
-            height: 280px;
-            background: linear-gradient(135deg, #cbd5e1, #94a3b8);
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
             align-items: center;
         }
-        .banner img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
 
-        /* 主體佈局：左側選單 + 右側內容網格 */
-        .main-layout {
-            display: flex;
-            max-width: 1200px;
-            width: 100%;
-            margin: 30px auto;
-            gap: 30px;
-            padding: 0 20px;
-            box-sizing: border-box;
+        /* 網頁頂部標頭 */
+        .brand-header {
+            text-align: center;
+            padding: 30px 20px 15px 20px;
         }
-
-        /* 左側分類選單 */
-        .sidebar {
-            width: 180px;
-            flex-shrink: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .side-btn {
-            background: #ffffff;
-            border: 2px solid transparent;
-            color: var(--text-color);
-            padding: 12px 20px;
-            text-align: left;
-            font-size: 1rem;
+        
+        .brand-title {
+            font-size: 2.6rem;
+            color: #638da3 !important;
+            margin: 0;
             font-weight: 700;
-            border-radius: 14px;
+            letter-spacing: 3px;
+        }
+
+        /* 網頁頂部 Tab 切換鍵按鈕列 */
+        .tab-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            background: #ffffff;
+            padding: 8px 15px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(86, 152, 195, 0.1);
+            margin-bottom: 30px;
+            max-width: 95%;
+            flex-wrap: wrap;
+            border: 2px solid var(--light-blue);
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-color);
+            padding: 10px 20px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            border-radius: 50px;
             cursor: pointer;
             transition: all 0.2s ease;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
         }
 
-        .side-btn:hover, .side-btn.active {
-            background: #e6f0f7;
-            color: var(--accent-color);
-            border-color: #b9d2e3;
+        .tab-btn:hover {
+            background: var(--light-blue);
+            color: #03A9F4;
         }
 
-        /* 右側內容區塊 */
-        .content-area {
-            flex-grow: 1;
+        /* 各分頁按鈕啟動時的專屬色彩 */
+        .tab-buttons .tab-btn.active:nth-child(1) {
+            background-color: #e91e63 !important;
+            color: #ffffff !important;
+            box-shadow: 0 4px 0px #ad1457 !important;
+        }
+        .tab-buttons .tab-btn.active:nth-child(2) {
+            background-color: #ff9800 !important;
+            color: #ffffff !important;
+            box-shadow: 0 4px 0px #e65100 !important;
+        }
+        .tab-buttons .tab-btn.active:nth-child(3) {
+            background-color: #9c27b0 !important;
+            color: #ffffff !important;
+            box-shadow: 0 4px 0px #6a1b9a !important;
+        }
+        .tab-buttons .tab-btn.active:nth-child(4) {
+            background-color: #00bcd4 !important;
+            color: #ffffff !important;
+            box-shadow: 0 4px 0px #00838f !important;
         }
 
-        .tab-pane {
+        /* 內容容器 */
+        .container {
+            max-width: 850px;
+            width: 100%;
+            padding: 0 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .tab-content {
             display: none;
+            width: 100%;
         }
 
-        .tab-pane.active {
+        .tab-content.active {
             display: block;
         }
 
-        /* 影片卡片網格 */
-        .video-grid {
+        /* 主卡片容器 */
+        .card {
+            background: var(--card-bg);
+            border-width: 4px;
+            border-style: solid;
+            border-radius: 28px;
+            padding: 35px 25px;
+            box-shadow: 0 10px 0px rgba(86, 152, 195, 0.15);
+            position: relative;
+            margin-bottom: 35px;
+        }
+
+        .card::before {
+            content: '● ●';
+            position: absolute;
+            top: 12px;
+            left: 20px;
+            opacity: 0.4;
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+        }
+
+        h2 {
+            font-size: 1.7rem;
+            margin-top: 0;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* 卡片網格樣式 */
+        .custom-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
             gap: 20px;
         }
 
-        /* 單張影片卡片 */
-        .video-card {
-            background: var(--card-bg);
-            border-radius: 18px;
+        .custom-card {
+            background: #ffffff;
+            border-width: 3px;
+            border-style: solid;
+            border-radius: 22px;
             overflow: hidden;
-            border: 2px solid var(--border-color);
-            box-shadow: 0 4px 12px rgba(86, 152, 195, 0.08);
             text-decoration: none;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.06);
             display: flex;
             flex-direction: column;
+            transition: all 0.2s ease;
         }
 
-        .video-card:hover {
+        .custom-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 8px 20px rgba(86, 152, 195, 0.15);
+            box-shadow: 0 10px 22px rgba(0,0,0,0.1);
         }
 
-        .thumbnail-container {
+        .custom-img-container {
             position: relative;
             width: 100%;
-            padding-bottom: 56.25%; /* 16:9 比例 */
-            background: #000;
+            padding-bottom: 56.25%;
+            background: #eee;
         }
 
-        .thumbnail-container img {
+        .custom-img-container img {
             position: absolute;
             top: 0;
             left: 0;
@@ -136,143 +181,170 @@
             object-fit: cover;
         }
 
-        .video-details {
-            padding: 15px;
+        .custom-info {
+            padding: 16px;
             display: flex;
             flex-direction: column;
             gap: 8px;
         }
 
-        .video-title {
+        .custom-title {
+            font-size: 1.05rem;
             font-weight: 700;
-            color: var(--text-color);
-            font-size: 0.95rem;
             line-height: 1.4;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
         }
 
-        .video-meta {
-            font-size: 0.8rem;
-            color: #78909c;
+        .custom-members {
+            font-size: 0.88rem;
             line-height: 1.5;
         }
 
-        footer {
-            text-align: center;
-            padding: 20px;
-            color: #a0b9cc;
+        .custom-date {
             font-size: 0.85rem;
-            margin-top: auto;
+            margin-top: 2px;
         }
 
-        /* RWD 手機響應式調整 */
-        @media (max-width: 768px) {
-            .main-layout {
-                flex-direction: column;
-            }
-            .sidebar {
-                width: 100%;
-                flex-direction: row;
-                overflow-x: auto;
-                padding-bottom: 5px;
-            }
-            .side-btn {
-                white-space: nowrap;
-                padding: 10px 15px;
-            }
+        footer {
+            margin: 20px 0 30px 0;
+            font-size: 0.85rem;
+            color: #a0b9cc;
+            text-align: center;
+            width: 100%;
+            letter-spacing: 1px;
         }
     </style>
 </head>
 <body>
 
-    <!-- 頂部 Banner -->
-    <div class="banner">
-        <!-- 這裡可以放你的 Banner 圖片 -->
-        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop" alt="Banner">
+    <div class="brand-header">
+        <div class="brand-title">ALD1 翻譯網站</div>
     </div>
 
-    <!-- 主要版型 -->
-    <div class="main-layout">
-        
-        <!-- 左側選單 -->
-        <div class="sidebar">
-            <button class="side-btn active" onclick="switchTab('lives', this)">🔴 直播</button>
-            <button class="side-btn" onclick="switchTab('shows', this)">📺 節目</button>
-            <button class="side-btn" onclick="switchTab('media', this)">📰 媒體</button>
-        </div>
+    <!-- 上方分頁按鈕列 -->
+    <div class="tab-buttons">
+        <button class="tab-btn active" onclick="showTab('tab-lyrics', this)">🎵 歌詞</button>
+        <button class="tab-btn" onclick="showTab('tab-shows', this)">📺 節目</button>
+        <button class="tab-btn" onclick="showTab('tab-lives', this)">🔴 直播</button>
+        <button class="tab-btn" onclick="showTab('tab-media', this)">📰 媒體</button>
+    </div>
 
-        <!-- 右側內容清單 -->
-        <div class="content-area">
-            
-            <!-- 直播分頁內容 -->
-            <div id="lives" class="tab-pane active">
-                <div class="video-grid">
-                    <!-- 影片卡片 1 -->
-                    <a href="https://www.youtube.com/watch?v=你的影片ID" target="_blank" class="video-card">
-                        <div class="thumbnail-container">
-                            <img src="https://img.youtube.com/vi/你的影片ID/mqdefault.jpg" alt="封面">
-                        </div>
-                        <div class="video-details">
-                            <div class="video-title">20260725 FLARE U IG直播</div>
-                            <div class="video-meta">
-                                翻譯：Lupus<br>
-                                字幕製作：西卡<br>
-                                校對：西卡
-                            </div>
-                        </div>
-                    </a>
-                    
-                    <!-- 可以複製上面這段 <a class="video-card">...</a> 來新增更多卡片 -->
-                </div>
-            </div>
+    <div class="container">
 
-            <!-- 節目分頁內容 -->
-            <div id="shows" class="tab-pane">
-                <div class="video-grid">
-                    <a href="https://www.youtube.com/watch?v=你的影片ID" target="_blank" class="video-card">
-                        <div class="thumbnail-container">
-                            <img src="https://img.youtube.com/vi/你的影片ID/mqdefault.jpg" alt="封面">
+        <!-- ================= 分頁 1：歌詞 ================= -->
+        <div id="tab-lyrics" class="tab-content active">
+            <style>
+                #tab-lyrics .card { border-color: #9FB5C3 !important; }
+                #tab-lyrics h2, #tab-lyrics .custom-title, #tab-lyrics .custom-members, #tab-lyrics .custom-date { color: #9FB5C3 !important; }
+                #tab-lyrics .custom-card { border-color: #9FB5C3 !important; }
+                #tab-lyrics .card::before { display: none !important; }
+            </style>
+            <div class="card">
+                <h2>歌詞翻譯作品</h2>
+                <div class="custom-grid">
+                    <a href="./260726-MC/" class="custom-card">
+                        <div class="custom-img-container">
+                            <img src="https://img.youtube.com/vi/cImgLX-9Co0/mqdefault.jpg" alt="縮圖">
                         </div>
-                        <div class="video-details">
-                            <div class="video-title">20260724 Another Class 節目</div>
-                            <div class="video-meta">
-                                翻譯：Lupus<br>
-                                字幕製作：西卡
-                            </div>
+                        <div class="custom-info">
+                            <div class="custom-title">No School Tomorrow 歌詞翻譯</div>
+                            <div class="custom-members">成員名稱</div>
+                            <div class="custom-date">2026.07.26</div>
                         </div>
                     </a>
                 </div>
             </div>
+        </div>
 
-            <!-- 媒體分頁內容 -->
-            <div id="media" class="tab-pane">
-                <div class="video-grid">
-                    <!-- 媒體內容卡片 -->
+        <!-- ================= 分頁 2：節目 ================= -->
+        <div id="tab-shows" class="tab-content">
+            <style>
+                #tab-shows .card { border-color: #c48b59 !important; }
+                #tab-shows h2, #tab-shows .custom-title, #tab-shows .custom-members, #tab-shows .custom-date { color: #c48b59 !important; }
+                #tab-shows .custom-card { border-color: #c48b59 !important; }
+                #tab-shows .card::before { display: none !important; }
+            </style>
+            <div class="card">
+                <h2>節目翻譯作品</h2>
+                <div class="custom-grid">
+                    <a href="./260726-MC/" class="custom-card">
+                        <div class="custom-img-container">
+                            <img src="https://img.youtube.com/vi/cImgLX-9Co0/mqdefault.jpg" alt="縮圖">
+                        </div>
+                        <div class="custom-info">
+                            <div class="custom-title">兩點的約會我是安英美</div>
+                            <div class="custom-members">俊抒、ARNO、LEO、相汎、鑫隆、安信、相炫</div>
+                            <div class="custom-date">2026.06.04</div>
+                        </div>
+                    </a>
                 </div>
             </div>
-
         </div>
+
+        <!-- ================= 分頁 3：直播 ================= -->
+        <div id="tab-lives" class="tab-content">
+            <style>
+                #tab-lives .card { border-color: #5b8c76 !important; }
+                #tab-lives h2, #tab-lives .custom-title, #tab-lives .custom-members, #tab-lives .custom-date { color: #5b8c76 !important; }
+                #tab-lives .custom-card { border-color: #5b8c76 !important; }
+                #tab-lives .card::before { display: none !important; }
+            </style>
+            <div class="card">
+                <h2>直播翻譯作品</h2>
+                <div class="custom-grid">
+                    <a href="./260726-MC/" class="custom-card">
+                        <div class="custom-img-container">
+                            <img src="https://img.youtube.com/vi/cImgLX-9Co0/mqdefault.jpg" alt="縮圖">
+                        </div>
+                        <div class="custom-info">
+                            <div class="custom-title">直播標題範例</div>
+                            <div class="custom-members">參與成員</div>
+                            <div class="custom-date">2026.07.25</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= 分頁 4：媒體 ================= -->
+        <div id="tab-media" class="tab-content">
+            <style>
+                #tab-media .card { border-color: #b87070 !important; }
+                #tab-media h2, #tab-media .custom-title, #tab-media .custom-members, #tab-media .custom-date { color: #b87070 !important; }
+                #tab-media .custom-card { border-color: #b87070 !important; }
+                #tab-media .card::before { display: none !important; }
+            </style>
+            <div class="card">
+                <h2>媒體翻譯作品</h2>
+                <div class="custom-grid">
+                    <a href="./260726-MC/" class="custom-card">
+                        <div class="custom-img-container">
+                            <img src="https://img.youtube.com/vi/cImgLX-9Co0/mqdefault.jpg" alt="縮圖">
+                        </div>
+                        <div class="custom-info">
+                            <div class="custom-title">媒體專題範例</div>
+                            <div class="custom-members">參與成員</div>
+                            <div class="custom-date">2026.07.24</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <footer>
         &copy; ald1.a1mem
     </footer>
 
-    <!-- 切換分頁的 JavaScript -->
+    <!-- 分頁切換 JavaScript 程式碼 -->
     <script>
-        function switchTab(tabId, btnElement) {
-            // 隱藏所有右側內容
-            const panes = document.querySelectorAll('.tab-pane');
-            panes.forEach(pane => pane.classList.remove('active'));
+        function showTab(tabId, btnElement) {
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
 
-            // 移除所有左側按鈕的 active 樣式
-            const buttons = document.querySelectorAll('.side-btn');
+            const buttons = document.querySelectorAll('.tab-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
 
-            // 顯示點擊的對應分頁與按鈕樣式
             document.getElementById(tabId).classList.add('active');
             btnElement.classList.add('active');
         }
