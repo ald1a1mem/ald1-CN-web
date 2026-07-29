@@ -141,11 +141,12 @@
         }
 
         /* 卡片網格樣式 */
-        .custom-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 20px;
-        }
+.custom-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 240px)); /* 強制每張卡片固定寬度為 240px */
+    gap: 20px;
+    justify-content: start; /* 靠左對齊，不會被自動拉寬 */
+}
 
         .custom-card {
             background: #ffffff;
@@ -257,6 +258,7 @@
                 <div class="custom-title">ALPHA DRIVE ONE - Good Life</div>
             </div>
         </a>
+
     </div>
 </div>
 
@@ -289,6 +291,7 @@
                 <div class="custom-title">260726 SBS 人氣歌謠 彝晛 & 俊抒 & 相沅 MC cut 合集</div>
             </div>
         </a>
+
     </div>
 </div>
 
@@ -311,6 +314,7 @@
             </style>
 
 
+
         </div>
 
         <!-- ================= 分頁 4：媒體 ================= -->
@@ -328,6 +332,8 @@
                     box-shadow: 0 4px 0px #9f8fae !important;
                 }
             </style>
+
+
 
         </div>
 
